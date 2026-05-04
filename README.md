@@ -1,1 +1,1 @@
-# Vas-megyei-hirdet-sek
+# Vas-megyei-hirdetések
