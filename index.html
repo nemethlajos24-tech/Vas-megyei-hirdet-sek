@@ -275,6 +275,37 @@
     }
 
     .contact {
+      .contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.contact-button {
+  display: inline-block;
+  background: #0f172a;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.contact-button:hover {
+  background: #1e293b;
+}
+
+.contact-button.secondary {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #bbf7d0;
+}
+
+.contact-button.secondary:hover {
+  background: #d1fae5;
+}
       border-top: 1px solid #e2e8f0;
       padding-top: 16px;
       color: #475569;
@@ -907,10 +938,17 @@ html {
           <h3>Lili Szépségszalon</h3>
           <p class="ad-title">Fodrászat, manikűr, alkalmi smink</p>
           <p class="ad-description">Modern szalon Sárváron, online időpontfoglalási lehetőséggel.</p>
-          <div class="contact">
-            <p>☎ +36 20 987 6543</p>
-            <p>✉ hello@liliszepseg.hu</p>
-          </div>
+<div class="contact">
+  <p>☎ +36 30 757 8253</p>
+  <p>✉ email@pelda.hu</p>
+  <p>🌐 https://pelda.hu</p>
+
+  <div class="contact-actions">
+    <a class="contact-button" href="tel:+36300000000">Hívás</a>
+    <a class="contact-button secondary" href="mailto:email@pelda.hu">Email</a>
+    <a class="contact-button secondary" href="https://pelda.hu" target="_blank" rel="noopener noreferrer">Weboldal</a>
+  </div>
+</div>
         </article>
 
         <article class="ad-card" data-category="otthon" data-search="őrségi otthon szerviz körmend javítás karbantartás villanyszerelés csőtörés">
