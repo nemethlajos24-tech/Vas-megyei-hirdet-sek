@@ -497,6 +497,18 @@ html {
         <h2>Vas megyei vállalkozások</h2>
       </div>
 
+      <div id="kiemeltHirdetesek" style="margin-bottom: 36px;">
+  <div class="section-title" style="margin-bottom: 18px;">
+    <span>Kiemelt hirdetések</span>
+    <h2 style="font-size: 28px;">Kiemelt Vas megyei vállalkozások</h2>
+    <p>
+      Ezek a vállalkozások kiemelt megjelenést kaptak, ezért előrébb és látványosabban jelennek meg az oldalon.
+    </p>
+  </div>
+
+  <div class="ads-grid" id="featuredAdsGrid"></div>
+</div>
+
       <div class="filters">
         <input id="searchInput" class="search-input" type="text" placeholder="Keresés: város, szolgáltatás, vállalkozás..." />
         <input id="citySelect" class="search-input" list="cityList" placeholder="Település szűrése..." style="max-width: 280px;" />
@@ -1450,8 +1462,29 @@ html {
     const searchInput = document.getElementById("searchInput");
     const citySelect = document.getElementById("citySelect");
     const buttons = document.querySelectorAll(".category-button");
-    const cards = document.querySelectorAll(".ad-card");
+    const cards = document.querySelectorAll("#adsGrid .ad-card");
+const featuredGrid = document.getElementById("featuredAdsGrid");
     let selectedCategory = "all";
+
+    function renderFeaturedAds() {
+  if (!featuredGrid) return;
+
+  const featuredCards = Array.from(cards).filter((card) =>
+    card.querySelector(".featured")
+  );
+
+  featuredGrid.innerHTML = "";
+
+  if (featuredCards.length === 0) {
+    document.getElementById("kiemeltHirdetesek").style.display = "none";
+    return;
+  }
+
+  featuredCards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    featuredGrid.appendChild(clone);
+  });
+}
 
     function filterCards() {
       const query = searchInput.value.toLowerCase().trim();
@@ -1487,6 +1520,7 @@ const cityMatches = !selectedCity || selectedCity === "all" || cityText.includes
 
     searchInput.addEventListener("input", filterCards);
     citySelect.addEventListener("input", filterCards);
+    renderFeaturedAds();
   </script>
 </body>
 </html>
