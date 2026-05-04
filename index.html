@@ -482,6 +482,27 @@ html {
 }
 
 .nav-cta {
+  .back-to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1200;
+  background: #0f172a;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-to-top:hover {
+  background: #047857;
+}
   background: #34d399;
   color: #052e23 !important;
   padding: 10px 14px;
@@ -1782,5 +1803,6 @@ clearFilters.addEventListener("click", () => {
 renderFeaturedAds();
     filterCards();
   </script>
+  <a href="#" class="back-to-top" aria-label="Vissza az oldal tetejére">↑</a>
 </body>
 </html>
