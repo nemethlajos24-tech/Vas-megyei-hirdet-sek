@@ -1,336 +1,698 @@
-import React, { useMemo, useState } from "react";
-import { Search, MapPin, Star, Megaphone, Mail, Phone, Building2, Wrench, Utensils, Scissors, Home, Car, Send } from "lucide-react";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vasi Hirdető - Vas megyei vállalkozások</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-const categories = [
-  { id: "all", label: "Összes" },
-  { id: "epitoipar", label: "Építőipar" },
-  { id: "vendeglatas", label: "Vendéglátás" },
-  { id: "szepseg", label: "Szépség" },
-  { id: "otthon", label: "Otthon" },
-  { id: "auto", label: "Autó" },
-];
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7f6;
+      color: #10201a;
+      line-height: 1.6;
+    }
 
-const ads = [
-  {
-    name: "Kőszegi Mester Kft.",
-    category: "epitoipar",
-    city: "Kőszeg",
-    title: "Burkolás, felújítás, kisebb kőműves munkák",
-    description: "Megbízható kivitelezés Vas megyében, ingyenes helyszíni felméréssel.",
-    phone: "+36 30 123 4567",
-    email: "info@koszegimester.hu",
-    featured: true,
-    icon: Wrench,
-  },
-  {
-    name: "Savaria Ízek Étterem",
-    category: "vendeglatas",
-    city: "Szombathely",
-    title: "Napi menü, céges ebéd, rendezvények",
-    description: "Házias ételek, gyors kiszolgálás, előrendelési lehetőség vállalkozásoknak is.",
-    phone: "+36 94 555 010",
-    email: "rendeles@savariaizek.hu",
-    featured: true,
-    icon: Utensils,
-  },
-  {
-    name: "Lili Szépségszalon",
-    category: "szepseg",
-    city: "Sárvár",
-    title: "Fodrászat, manikűr, alkalmi smink",
-    description: "Modern szalon Sárváron, online időpontfoglalási lehetőséggel.",
-    phone: "+36 20 987 6543",
-    email: "hello@liliszepseg.hu",
-    featured: false,
-    icon: Scissors,
-  },
-  {
-    name: "Őrségi Otthon Szerviz",
-    category: "otthon",
-    city: "Körmend",
-    title: "Háztartási javítások és karbantartás",
-    description: "Gyors segítség csőtörés, kisebb villanyszerelés és otthoni javítások esetén.",
-    phone: "+36 70 111 2222",
-    email: "szerviz@orsegiotthon.hu",
-    featured: false,
-    icon: Home,
-  },
-  {
-    name: "Vasi Autókozmetika",
-    category: "auto",
-    city: "Celldömölk",
-    title: "Külső-belső autótisztítás, polírozás",
-    description: "Időpontfoglalás rugalmasan, céges flották tisztítása kedvezménnyel.",
-    phone: "+36 30 444 7788",
-    email: "info@vasiauto.hu",
-    featured: false,
-    icon: Car,
-  },
-];
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-const packages = [
-  {
-    title: "Alap hirdetés",
-    price: "0 Ft / induláskor",
-    details: "Név, település, rövid leírás, telefonszám és email megjelenítése.",
-  },
-  {
-    title: "Kiemelt hirdetés",
-    price: "később fizetős",
-    details: "Előrébb sorolás, kiemelt jelvény és több bemutatkozó szöveg.",
-  },
-  {
-    title: "Prémium csomag",
-    price: "egyedi ajánlat",
-    details: "Főoldali megjelenés, fotók, akciók és közösségi média linkek.",
-  },
-];
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #064e3b);
+      color: white;
+      padding: 80px 20px;
+    }
 
-export default function VasMegyeiHirdetooldal() {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+    }
 
-  const filteredAds = useMemo(() => {
-    const normalized = query.toLowerCase().trim();
-    return ads.filter((ad) => {
-      const matchesCategory = category === "all" || ad.category === category;
-      const matchesQuery =
-        !normalized ||
-        [ad.name, ad.city, ad.title, ad.description].some((field) =>
-          field.toLowerCase().includes(normalized)
-        );
-      return matchesCategory && matchesQuery;
-    });
-  }, [query, category]);
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
 
-  return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-900 px-6 py-20 text-white">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 0, transparent 22%), radial-gradient(circle at 80% 10%, #34d399 0, transparent 24%)" }} />
-        <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-emerald-100 ring-1 ring-white/20">
-              <MapPin className="h-4 w-4" /> Vas megye vállalkozói egy helyen
-            </div>
-            <h1 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Hirdetési oldal helyi vállalkozásoknak
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-              Találd meg a közeli szakembereket, szolgáltatókat és üzleteket Vas megyében. Vállalkozóként pedig jelenj meg ott, ahol a helyi ügyfelek keresnek.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#hirdetesek" className="rounded-2xl bg-emerald-400 px-6 py-3 text-center font-semibold text-slate-950 shadow-lg shadow-emerald-950/30 transition hover:bg-emerald-300">
-                Hirdetések böngészése
-              </a>
-              <a href="#feladas" className="rounded-2xl bg-white/10 px-6 py-3 text-center font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/15">
-                Hirdetés feladása
-              </a>
-            </div>
-          </motion.div>
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      color: #d1fae5;
+      font-size: 14px;
+    }
 
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.1 }} className="rounded-[2rem] bg-white/10 p-5 shadow-2xl ring-1 ring-white/20 backdrop-blur">
-            <div className="rounded-[1.5rem] bg-white p-6 text-slate-950">
-              <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-emerald-100 p-3 text-emerald-700">
-                  <Megaphone className="h-7 w-7" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-slate-500">Induló ajánlat</p>
-                  <h2 className="text-2xl font-bold">Első hirdetés ingyen</h2>
-                </div>
-              </div>
-              <p className="mt-5 text-slate-600">
-                A kezdeti időszakban a vállalkozások díjmentesen bekerülhetnek az oldalra, így gyorsan felépíthető egy hasznos helyi adatbázis.
-              </p>
-              <div className="mt-6 grid gap-3">
-                {["Vas megyei célközönség", "Település és kategória szerinti keresés", "Kiemelt hirdetési lehetőségek később"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-2xl bg-slate-100 px-4 py-3 text-sm font-medium">
-                    <Star className="h-4 w-4 text-emerald-600" /> {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      color: #dce7e3;
+      font-size: 18px;
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .button-primary {
+      background: #34d399;
+      color: #052e23;
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 32px;
+      padding: 18px;
+    }
+
+    .hero-card-inner {
+      background: white;
+      color: #10201a;
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .hero-card-inner h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card-inner p {
+      color: #475569;
+      font-size: 16px;
+    }
+
+    .check-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .check-list div {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    section {
+      padding: 64px 20px;
+    }
+
+    .section-title {
+      margin-bottom: 30px;
+    }
+
+    .section-title span {
+      color: #047857;
+      font-weight: 800;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin-top: 6px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step,
+    .ad-card,
+    .package,
+    .form-box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 14px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .category-button {
+      border: 1px solid #cbd5e1;
+      background: white;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .category-button.active {
+      background: #0f172a;
+      color: white;
+      border-color: #0f172a;
+    }
+
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ad-card {
+      transition: 0.2s;
+    }
+
+    .ad-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+    }
+
+    .ad-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .ad-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: #d1fae5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .featured {
+      align-self: start;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .city {
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .ad-card h3 {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .ad-title {
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .ad-description {
+      color: #475569;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .contact {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 16px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .package {
+      background: #f8fafc;
+    }
+
+    .price {
+      color: #047857;
+      font-size: 24px;
+      font-weight: 900;
+      margin: 12px 0;
+    }
+
+    .submit-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .dark-box {
+      background: #0f172a;
+      color: white;
+      border-radius: 28px;
+      padding: 24px;
+      margin-top: 22px;
+    }
+
+    .dark-box ul {
+      margin-top: 14px;
+      padding-left: 18px;
+      color: #dce7e3;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      font-weight: 800;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      margin-top: 7px;
+      padding: 14px 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .submit-button {
+      border: 0;
+      background: #0f172a;
+      color: white;
+      padding: 16px;
+      border-radius: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .small-note {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    footer {
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 26px 20px;
+      color: #64748b;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .submit-grid,
+      .steps,
+      .ads-grid,
+      .packages {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      section,
+      .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">📍 Vas megye vállalkozói egy helyen</div>
+        <h1>Hirdetési oldal helyi vállalkozásoknak</h1>
+        <p>
+          Találd meg a közeli szakembereket, szolgáltatókat és üzleteket Vas megyében.
+          Vállalkozóként pedig jelenj meg ott, ahol a helyi ügyfelek keresnek.
+        </p>
+        <div class="buttons">
+          <a href="#hirdetesek" class="button button-primary">Hirdetések böngészése</a>
+          <a href="#feladas" class="button button-secondary">Hirdetés feladása</a>
         </div>
-      </section>
+      </div>
 
-      <section className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { number: "1", title: "Vállalkozó jelentkezik", text: "Elküldi a vállalkozás nevét, települését és elérhetőségét." },
-            { number: "2", title: "Hirdetés megjelenik", text: "Az oldalra kategória és település alapján kerül fel a hirdetés." },
-            { number: "3", title: "Ügyfelek keresnek", text: "A látogatók könnyen megtalálják a számukra megfelelő szolgáltatót." },
-          ].map((step) => (
-            <div key={step.number} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 font-bold text-white">{step.number}</div>
-              <h3 className="text-xl font-bold">{step.title}</h3>
-              <p className="mt-2 text-slate-600">{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="hirdetesek" className="mx-auto max-w-6xl px-6 py-12">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="font-semibold text-emerald-700">Helyi ajánlatok</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">Vas megyei vállalkozások</h2>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Keresés: város, szolgáltatás..."
-                className="w-full rounded-2xl border border-slate-200 bg-white py-3 pl-11 pr-4 outline-none ring-emerald-200 transition focus:ring-4 sm:w-80"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-8 flex gap-2 overflow-x-auto pb-2">
-          {categories.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setCategory(item.id)}
-              className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${
-                category === item.id
-                  ? "bg-slate-950 text-white"
-                  : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filteredAds.map((ad) => {
-            const Icon = ad.icon || Building2;
-            return (
-              <motion.article layout key={ad.name} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="rounded-2xl bg-emerald-50 p-3 text-emerald-700">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  {ad.featured && (
-                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">Kiemelt</span>
-                  )}
-                </div>
-                <div className="mt-5">
-                  <p className="flex items-center gap-1 text-sm font-medium text-slate-500"><MapPin className="h-4 w-4" /> {ad.city}</p>
-                  <h3 className="mt-2 text-xl font-bold">{ad.name}</h3>
-                  <p className="mt-2 font-semibold text-slate-800">{ad.title}</p>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{ad.description}</p>
-                </div>
-                <div className="mt-5 space-y-2 border-t border-slate-100 pt-5 text-sm text-slate-600">
-                  <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> {ad.phone}</p>
-                  <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> {ad.email}</p>
-                </div>
-              </motion.article>
-            );
-          })}
-        </div>
-
-        {filteredAds.length === 0 && (
-          <div className="rounded-3xl bg-white p-10 text-center shadow-sm ring-1 ring-slate-200">
-            <p className="text-lg font-semibold">Nincs találat erre a keresésre.</p>
-            <p className="mt-2 text-slate-600">Próbálj másik települést vagy kategóriát megadni.</p>
-          </div>
-        )}
-      </section>
-
-      <section className="bg-white px-6 py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-8 text-center">
-            <p className="font-semibold text-emerald-700">Hirdetési lehetőségek</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">Csomagok vállalkozóknak</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-              Induláskor érdemes ingyenes alapmegjelenést kínálni, majd később kiemelt hirdetésekkel bevételt építeni.
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {packages.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="text-xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-2xl font-black text-emerald-700">{item.price}</p>
-                <p className="mt-4 text-slate-600">{item.details}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="feladas" className="mx-auto grid max-w-6xl gap-8 px-6 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div>
-          <p className="font-semibold text-emerald-700">Jelentkezés</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight">Hirdetés feladása</h2>
-          <p className="mt-4 text-slate-600">
-            Ez a rész később összeköthető Google Űrlappal, emaillel vagy saját admin felülettel. Kezdésnek elég, ha a vállalkozások emailben elküldik az adataikat.
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <h2>Első hirdetés ingyen</h2>
+          <p>
+            A kezdeti időszakban a vállalkozások díjmentesen bekerülhetnek az oldalra,
+            így gyorsan felépíthető egy hasznos helyi adatbázis.
           </p>
-          <div className="mt-6 rounded-3xl bg-slate-950 p-6 text-white">
-            <h3 className="text-xl font-bold">Mit küldjön a hirdető?</h3>
-            <ul className="mt-4 space-y-2 text-slate-200">
-              <li>• vállalkozás neve</li>
-              <li>• település</li>
-              <li>• szolgáltatás rövid leírása</li>
-              <li>• telefonszám, email, weboldal vagy Facebook</li>
-              <li>• 1–3 kép, ha később képes hirdetéseket is szeretnél</li>
-            </ul>
+          <div class="check-list">
+            <div>⭐ Vas megyei célközönség</div>
+            <div>⭐ Település és kategória szerinti keresés</div>
+            <div>⭐ Kiemelt hirdetési lehetőségek később</div>
           </div>
         </div>
+      </div>
+    </div>
+  </header>
 
-        <form className="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-200" onSubmit={(event) => event.preventDefault()}>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block">
-              <span className="text-sm font-semibold text-slate-700">Vállalkozás neve</span>
-              <input className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4" placeholder="Pl. Vasi Pékség" />
+  <section>
+    <div class="container steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Vállalkozó jelentkezik</h3>
+        <p>Elküldi a vállalkozás nevét, települését és elérhetőségét.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Hirdetés megjelenik</h3>
+        <p>Az oldalra kategória és település alapján kerül fel a hirdetés.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Ügyfelek keresnek</h3>
+        <p>A látogatók könnyen megtalálják a számukra megfelelő szolgáltatót.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hirdetesek">
+    <div class="container">
+      <div class="section-title">
+        <span>Helyi ajánlatok</span>
+        <h2>Vas megyei vállalkozások</h2>
+      </div>
+
+      <div class="filters">
+        <input id="searchInput" class="search-input" type="text" placeholder="Keresés: város, szolgáltatás, vállalkozás..." />
+        <button class="category-button active" data-category="all">Összes</button>
+        <button class="category-button" data-category="epitoipar">Építőipar</button>
+        <button class="category-button" data-category="vendeglatas">Vendéglátás</button>
+        <button class="category-button" data-category="szepseg">Szépség</button>
+        <button class="category-button" data-category="otthon">Otthon</button>
+        <button class="category-button" data-category="auto">Autó</button>
+      </div>
+
+      <div class="ads-grid" id="adsGrid">
+        <article class="ad-card" data-category="epitoipar" data-search="kőszegi mester kft kőszeg burkolás felújítás kőműves munkák">
+          <div class="ad-top">
+            <div class="ad-icon">🔧</div>
+            <div class="featured">Kiemelt</div>
+          </div>
+          <div class="city">📍 Kőszeg</div>
+          <h3>Kőszegi Mester Kft.</h3>
+          <p class="ad-title">Burkolás, felújítás, kisebb kőműves munkák</p>
+          <p class="ad-description">Megbízható kivitelezés Vas megyében, ingyenes helyszíni felméréssel.</p>
+          <div class="contact">
+            <p>☎ +36 30 123 4567</p>
+            <p>✉ info@koszegimester.hu</p>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="vendeglatas" data-search="savaria ízek étterem szombathely napi menü céges ebéd rendezvény">
+          <div class="ad-top">
+            <div class="ad-icon">🍽️</div>
+            <div class="featured">Kiemelt</div>
+          </div>
+          <div class="city">📍 Szombathely</div>
+          <h3>Savaria Ízek Étterem</h3>
+          <p class="ad-title">Napi menü, céges ebéd, rendezvények</p>
+          <p class="ad-description">Házias ételek, gyors kiszolgálás, előrendelési lehetőség vállalkozásoknak is.</p>
+          <div class="contact">
+            <p>☎ +36 94 555 010</p>
+            <p>✉ rendeles@savariaizek.hu</p>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="szepseg" data-search="lili szépségszalon sárvár fodrászat manikűr smink">
+          <div class="ad-top">
+            <div class="ad-icon">✂️</div>
+          </div>
+          <div class="city">📍 Sárvár</div>
+          <h3>Lili Szépségszalon</h3>
+          <p class="ad-title">Fodrászat, manikűr, alkalmi smink</p>
+          <p class="ad-description">Modern szalon Sárváron, online időpontfoglalási lehetőséggel.</p>
+          <div class="contact">
+            <p>☎ +36 20 987 6543</p>
+            <p>✉ hello@liliszepseg.hu</p>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="otthon" data-search="őrségi otthon szerviz körmend javítás karbantartás villanyszerelés csőtörés">
+          <div class="ad-top">
+            <div class="ad-icon">🏠</div>
+          </div>
+          <div class="city">📍 Körmend</div>
+          <h3>Őrségi Otthon Szerviz</h3>
+          <p class="ad-title">Háztartási javítások és karbantartás</p>
+          <p class="ad-description">Gyors segítség csőtörés, kisebb villanyszerelés és otthoni javítások esetén.</p>
+          <div class="contact">
+            <p>☎ +36 70 111 2222</p>
+            <p>✉ szerviz@orsegiotthon.hu</p>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="auto" data-search="vasi autókozmetika celldömölk autótisztítás polírozás">
+          <div class="ad-top">
+            <div class="ad-icon">🚗</div>
+          </div>
+          <div class="city">📍 Celldömölk</div>
+          <h3>Vasi Autókozmetika</h3>
+          <p class="ad-title">Külső-belső autótisztítás, polírozás</p>
+          <p class="ad-description">Időpontfoglalás rugalmasan, céges flották tisztítása kedvezménnyel.</p>
+          <div class="contact">
+            <p>☎ +36 30 444 7788</p>
+            <p>✉ info@vasiauto.hu</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title" style="text-align: center;">
+        <span>Hirdetési lehetőségek</span>
+        <h2>Csomagok vállalkozóknak</h2>
+        <p>Induláskor érdemes ingyenes alapmegjelenést kínálni, majd később kiemelt hirdetésekkel bevételt építeni.</p>
+      </div>
+
+      <div class="packages">
+        <div class="package">
+          <h3>Alap hirdetés</h3>
+          <div class="price">0 Ft / induláskor</div>
+          <p>Név, település, rövid leírás, telefonszám és email megjelenítése.</p>
+        </div>
+        <div class="package">
+          <h3>Kiemelt hirdetés</h3>
+          <div class="price">később fizetős</div>
+          <p>Előrébb sorolás, kiemelt jelvény és több bemutatkozó szöveg.</p>
+        </div>
+        <div class="package">
+          <h3>Prémium csomag</h3>
+          <div class="price">egyedi ajánlat</div>
+          <p>Főoldali megjelenés, fotók, akciók és közösségi média linkek.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="feladas">
+    <div class="container submit-grid">
+      <div>
+        <div class="section-title">
+          <span>Jelentkezés</span>
+          <h2>Hirdetés feladása</h2>
+        </div>
+        <p>
+          Ez a rész később összeköthető Google Űrlappal, emaillel vagy saját admin felülettel.
+          Kezdésnek elég, ha a vállalkozások emailben elküldik az adataikat.
+        </p>
+        <div class="dark-box">
+          <h3>Mit küldjön a hirdető?</h3>
+          <ul>
+            <li>vállalkozás neve</li>
+            <li>település</li>
+            <li>szolgáltatás rövid leírása</li>
+            <li>telefonszám, email, weboldal vagy Facebook</li>
+            <li>1–3 kép, ha később képes hirdetéseket is szeretnél</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <form onsubmit="return false;">
+          <div class="form-row">
+            <label>
+              Vállalkozás neve
+              <input type="text" placeholder="Pl. Vasi Pékség" />
             </label>
-            <label className="block">
-              <span className="text-sm font-semibold text-slate-700">Település</span>
-              <input className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4" placeholder="Pl. Szombathely" />
-            </label>
-            <label className="block sm:col-span-2">
-              <span className="text-sm font-semibold text-slate-700">Kategória</span>
-              <select className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4">
-                <option>Építőipar</option>
-                <option>Vendéglátás</option>
-                <option>Szépség</option>
-                <option>Otthon</option>
-                <option>Autó</option>
-                <option>Egyéb</option>
-              </select>
-            </label>
-            <label className="block sm:col-span-2">
-              <span className="text-sm font-semibold text-slate-700">Rövid bemutatkozás</span>
-              <textarea className="mt-2 min-h-28 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4" placeholder="Írd le röviden, mivel foglalkozik a vállalkozás..." />
-            </label>
-            <label className="block">
-              <span className="text-sm font-semibold text-slate-700">Telefonszám</span>
-              <input className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4" placeholder="+36..." />
-            </label>
-            <label className="block">
-              <span className="text-sm font-semibold text-slate-700">Email</span>
-              <input className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none ring-emerald-200 focus:ring-4" placeholder="email@pelda.hu" />
+            <label>
+              Település
+              <input type="text" placeholder="Pl. Szombathely" />
             </label>
           </div>
-          <button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 font-bold text-white transition hover:bg-slate-800">
-            <Send className="h-5 w-5" /> Jelentkezés elküldése
-          </button>
-          <p className="mt-3 text-center text-xs text-slate-500">
-            Demo űrlap: élesítéskor Google Űrlaphoz, emailhez vagy adatbázishoz köthető.
-          </p>
+          <label>
+            Kategória
+            <select>
+              <option>Építőipar</option>
+              <option>Vendéglátás</option>
+              <option>Szépség</option>
+              <option>Otthon</option>
+              <option>Autó</option>
+              <option>Egyéb</option>
+            </select>
+          </label>
+          <label>
+            Rövid bemutatkozás
+            <textarea placeholder="Írd le röviden, mivel foglalkozik a vállalkozás..."></textarea>
+          </label>
+          <div class="form-row">
+            <label>
+              Telefonszám
+              <input type="text" placeholder="+36..." />
+            </label>
+            <label>
+              Email
+              <input type="email" placeholder="email@pelda.hu" />
+            </label>
+          </div>
+          <button class="submit-button" type="submit">Jelentkezés elküldése</button>
+          <p class="small-note">Demo űrlap: élesítéskor Google Űrlaphoz, emailhez vagy adatbázishoz köthető.</p>
         </form>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <footer className="border-t border-slate-200 bg-white px-6 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
-          <p className="font-semibold text-slate-900">VasMegyeiHirdető.hu</p>
-          <p>Helyi vállalkozások, szolgáltatók és ajánlatok gyűjtőoldala.</p>
-        </div>
-      </footer>
-    </main>
-  );
-}
+  <footer>
+    <div class="container footer-inner">
+      <strong>Vasi Hirdető</strong>
+      <span>Helyi vállalkozások, szolgáltatók és ajánlatok gyűjtőoldala.</span>
+    </div>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const buttons = document.querySelectorAll(".category-button");
+    const cards = document.querySelectorAll(".ad-card");
+    let selectedCategory = "all";
+
+    function filterCards() {
+      const query = searchInput.value.toLowerCase().trim();
+
+      cards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+        const searchText = card.getAttribute("data-search").toLowerCase();
+        const categoryMatches = selectedCategory === "all" || category === selectedCategory;
+        const queryMatches = !query || searchText.includes(query);
+
+        if (categoryMatches && queryMatches) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        selectedCategory = button.getAttribute("data-category");
+        filterCards();
+      });
+    });
+
+    searchInput.addEventListener("input", filterCards);
+  </script>
+</body>
+</html>
