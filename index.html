@@ -1448,20 +1448,27 @@ html {
 
   <script>
     const searchInput = document.getElementById("searchInput");
+    const citySelect = document.getElementById("citySelect");
     const buttons = document.querySelectorAll(".category-button");
     const cards = document.querySelectorAll(".ad-card");
     let selectedCategory = "all";
 
     function filterCards() {
       const query = searchInput.value.toLowerCase().trim();
+      const selectedCity = citySelect.value.toLowerCase().trim();
 
       cards.forEach((card) => {
         const category = card.getAttribute("data-category");
         const searchText = card.getAttribute("data-search").toLowerCase();
-        const categoryMatches = selectedCategory === "all" || category === selectedCategory;
-        const queryMatches = !query || searchText.includes(query);
+const cityElement = card.querySelector(".city");
+const cityText = cityElement ? cityElement.textContent.toLowerCase() : "";
 
-        if (categoryMatches && queryMatches) {
+const categoryMatches = selectedCategory === "all" || category === selectedCategory;
+const queryMatches = !query || searchText.includes(query);
+const cityMatches = !selectedCity || selectedCity === "all" || cityText.includes(selectedCity);
+
+
+        if (categoryMatches && queryMatches && cityMatches) {
           card.classList.remove("hidden");
         } else {
           card.classList.add("hidden");
@@ -1479,6 +1486,7 @@ html {
     });
 
     searchInput.addEventListener("input", filterCards);
+    citySelect.addEventListener("input", filterCards);
   </script>
 </body>
 </html>
