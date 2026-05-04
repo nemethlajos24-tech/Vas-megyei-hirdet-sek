@@ -747,7 +747,23 @@ html {
 <button class="category-button" data-category="penzugy">Pénzügy</button>
 <button class="category-button" data-category="egyeb">Egyéb szolgáltatás</button>
       </div>
+      
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 22px;">
+  <p id="resultsCount" style="font-weight: 800; color: #334155;">
+    Találatok betöltése...
+  </p>
 
+  <button id="clearFilters" class="category-button" type="button">
+    Szűrők törlése
+  </button>
+</div>
+
+<div id="noResultsMessage" class="form-box" style="display: none; text-align: center; margin-bottom: 24px;">
+  <h3>Nincs találat</h3>
+  <p style="color: #64748b; margin-top: 8px;">
+    Próbálj másik keresőszót, települést vagy kategóriát választani.
+  </p>
+</div>
       <div class="ads-grid" id="adsGrid">
         <article class="ad-card" data-category="epitoipar" data-search="kőszegi mester kft kőszeg burkolás felújítás kőműves munkák">
           <div class="ad-top">
@@ -1464,6 +1480,9 @@ html {
     const buttons = document.querySelectorAll(".category-button");
     const cards = document.querySelectorAll("#adsGrid .ad-card");
 const featuredGrid = document.getElementById("featuredAdsGrid");
+    const resultsCount = document.getElementById("resultsCount");
+const noResultsMessage = document.getElementById("noResultsMessage");
+const clearFilters = document.getElementById("clearFilters");
     let selectedCategory = "all";
 
     function renderFeaturedAds() {
@@ -1490,6 +1509,8 @@ const featuredGrid = document.getElementById("featuredAdsGrid");
       const query = searchInput.value.toLowerCase().trim();
       const selectedCity = citySelect.value.toLowerCase().trim();
 
+      let visibleCount = 0;
+
       cards.forEach((card) => {
         const category = card.getAttribute("data-category");
         const searchText = card.getAttribute("data-search").toLowerCase();
@@ -1502,11 +1523,19 @@ const cityMatches = !selectedCity || selectedCity === "all" || cityText.includes
 
 
         if (categoryMatches && queryMatches && cityMatches) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
+  card.classList.remove("hidden");
+  visibleCount++;
+} else {
+  card.classList.add("hidden");
+}
       });
+          if (resultsCount) {
+      resultsCount.textContent = visibleCount + " hirdetés található";
+    }
+
+    if (noResultsMessage) {
+      noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+    }
     }
 
     buttons.forEach((button) => {
@@ -1518,9 +1547,27 @@ const cityMatches = !selectedCity || selectedCity === "all" || cityText.includes
       });
     });
 
-    searchInput.addEventListener("input", filterCards);
-    citySelect.addEventListener("input", filterCards);
-    renderFeaturedAds();
+searchInput.addEventListener("input", filterCards);
+citySelect.addEventListener("input", filterCards);
+
+clearFilters.addEventListener("click", () => {
+  searchInput.value = "";
+  citySelect.value = "";
+  selectedCategory = "all";
+
+  buttons.forEach((button) => {
+    button.classList.remove("active");
+
+    if (button.getAttribute("data-category") === "all") {
+      button.classList.add("active");
+    }
+  });
+
+  filterCards();
+});
+
+renderFeaturedAds();
+    filterCards();
   </script>
 </body>
 </html>
