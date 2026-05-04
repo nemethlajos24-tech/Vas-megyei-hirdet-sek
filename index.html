@@ -412,7 +412,70 @@
 /* Szebb görgetés a belső linkeknél */
 html {
   scroll-behavior: smooth;
+
+  /* Felső menüsor */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2e8f0;
 }
+
+.topbar-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.logo {
+  font-weight: 900;
+  color: #0f172a;
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.nav-links a {
+  color: #334155;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #047857;
+}
+
+.nav-cta {
+  background: #34d399;
+  color: #052e23 !important;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+@media (max-width: 760px) {
+  .topbar-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    justify-content: flex-start;
+  }
+}
+}
+  
 
     @media (max-width: 900px) {
       .hero-grid,
@@ -438,6 +501,19 @@ html {
   </style>
 </head>
 <body>
+    <nav class="topbar">
+    <div class="topbar-inner">
+      <a href="#" class="logo">Vasi Hirdető</a>
+
+      <div class="nav-links">
+        <a href="#hirdetesek">Hirdetések</a>
+        <a href="#arak">Árak</a>
+        <a href="#hirdetoknek">Hirdetőknek</a>
+        <a href="#feladas" class="nav-cta">Hirdetés feladása</a>
+        <a href="#kapcsolat">Kapcsolat</a>
+      </div>
+    </div>
+  </nav>
   <header class="hero">
     <div class="container hero-grid">
       <div>
