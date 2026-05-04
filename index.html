@@ -4,6 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vasi Hirdető - Vas megyei vállalkozások</title>
+  /* Alsó információs oldalak elrejtése a kezdőoldalon */
+#impresszum,
+#adatkezeles,
+#hirdetesi-szabalyzat,
+#felhasznalasi-feltetelek,
+#cookie,
+#kapcsolat {
+  display: none;
+}
+
+/* Csak akkor jelenjenek meg, ha a láblécből rákattintanak */
+#impresszum:target,
+#adatkezeles:target,
+#hirdetesi-szabalyzat:target,
+#felhasznalasi-feltetelek:target,
+#cookie:target,
+#kapcsolat:target {
+  display: block;
+}
+
+/* Szebb görgetés a belső linkeknél */
+html {
+  scroll-behavior: smooth;
+}
   <style>
     * {
       box-sizing: border-box;
