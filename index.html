@@ -437,8 +437,9 @@
 /* Szebb görgetés a belső linkeknél */
 html {
   scroll-behavior: smooth;
+}
 
-  /* Felső menüsor */
+/* Felső menüsor */
 .topbar {
   position: sticky;
   top: 0;
@@ -483,7 +484,13 @@ html {
 }
 
 .nav-cta {
-  .back-to-top {
+  background: #34d399;
+  color: #052e23 !important;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+.back-to-top {
   position: fixed;
   right: 18px;
   bottom: 18px;
@@ -504,11 +511,6 @@ html {
 .back-to-top:hover {
   background: #047857;
 }
-  background: #34d399;
-  color: #052e23 !important;
-  padding: 10px 14px;
-  border-radius: 999px;
-}
 
 @media (max-width: 760px) {
   .topbar-inner {
@@ -520,9 +522,7 @@ html {
     justify-content: flex-start;
   }
 }
-}
-  
-
+    
     @media (max-width: 900px) {
       .hero-grid,
       .submit-grid,
