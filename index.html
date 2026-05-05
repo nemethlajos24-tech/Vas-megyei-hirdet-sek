@@ -1007,37 +1007,36 @@ Szállás: szallas
 Pénzügy: penzugy
 Egyéb szolgáltatás: egyeb
 
-<article class="ad-card" data-category="IDE_KATEGORIAKOD" data-search="IDE_VALLALKOZAS_NEV IDE_TELEPULES IDE_KULCSSZAVAK">
-  <!-- Ha van saját kép, ezt használd: -->
-  <img src="kepek/IDE_KEPFAJL_NEVE.jpg" alt="IDE_VALLALKOZAS_NEV" class="ad-image">
+<template id="uj-hirdeteskartya-sablon">
+  <article class="ad-card" data-category="IDE_KATEGORIAKOD" data-search="IDE_VALLALKOZAS_NEV IDE_TELEPULES IDE_KULCSSZAVAK">
+    <img src="kepek/IDE_KEPFAJL_NEVE.jpg" alt="IDE_VALLALKOZAS_NEV" class="ad-image">
 
-  <!-- Ha nincs saját kép, akkor a fenti img sort töröld, és ezt használd helyette: -->
-  <!-- <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div> -->
+    <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
 
-  <div class="ad-top">
-  <div class="ad-top">
-    <div class="ad-icon">🔧</div>
-    <div class="featured">Kiemelt</div>
-  </div>
-
-  <div class="city">📍 IDE_TELEPULES</div>
-  <h3>IDE_VALLALKOZAS_NEV</h3>
-  <p class="ad-title">IDE_ROVID_SZOLGALTATAS_CIM</p>
-  <p class="ad-description">IDE_ROVID_BEMUTATKOZAS</p>
-
-  <div class="contact">
-    <p>☎ IDE_LATHATO_TELEFONSZAM</p>
-    <p>✉ IDE_EMAIL_CIM</p>
-    <p>🌐 IDE_WEBOLDAL_VAGY_FACEBOOK_LINK</p>
-
-    <div class="contact-actions">
-      <a class="contact-button" href="tel:IDE_TELEFONSZAM_SZOKOZ_NELKUL">Hívás</a>
-      <a class="contact-button secondary" href="mailto:IDE_EMAIL_CIM">Email</a>
-      <a class="contact-button secondary" href="IDE_WEBOLDAL_VAGY_FACEBOOK_LINK" target="_blank" rel="noopener noreferrer">Weboldal</a>
+    <div class="ad-top">
+      <div class="ad-icon">🔧</div>
+      <div class="featured">Kiemelt</div>
     </div>
-  </div>
-</article>
--->
+
+    <div class="city">📍 IDE_TELEPULES</div>
+    <h3>IDE_VALLALKOZAS_NEV</h3>
+    <p class="ad-title">IDE_ROVID_SZOLGALTATAS_CIM</p>
+    <p class="ad-description">IDE_ROVID_BEMUTATKOZAS</p>
+
+    <div class="contact">
+      <p>☎ IDE_LATHATO_TELEFONSZAM</p>
+      <p>✉ IDE_EMAIL_CIM</p>
+      <p>🌐 IDE_WEBOLDAL_VAGY_FACEBOOK_LINK</p>
+
+      <div class="contact-actions">
+        <a class="contact-button" href="tel:IDE_TELEFONSZAM_SZOKOZ_NELKUL">Hívás</a>
+        <a class="contact-button secondary" href="mailto:IDE_EMAIL_CIM">Email</a>
+        <a class="contact-button secondary" href="vallalkozasok/IDE_ADATLAP_FAJLNEV.html">Adatlap</a>
+      </div>
+    </div>
+  </article>
+</template>
+          
 <article class="ad-card" data-category="epitoipar" data-search="kőszegi mester kft kőszeg burkolás felújítás kisebb kőműves munkák építőipar helyszíni felmérés">
   <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
   <div class="ad-top">
