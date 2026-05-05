@@ -315,3 +315,98 @@ Alul kattints:
 **Változtatások véglegesítése**
 
 Ezzel lesz egy külön ellenőrzőlistád minden új ügyfél felviteléhez. Később, ha azt írod, hogy **„új ügyfelet szeretnék f
+
+
+---
+
+# Kép / logó kezelése hirdetéskártyáknál
+
+A hirdetéskártyák egységes magassága miatt minden kártyában legyen képhely.
+
+## 1. Ha az ügyfél küld képet vagy logót
+
+A képet a `kepek` mappába kell feltölteni.
+
+Példa:
+
+```text
+kepek/vasi-autokozmetika.jpg
+
+Fájlnév szabályok:
+
+kisbetű legyen
+ékezet ne legyen
+szóköz helyett kötőjel legyen
+.jpg, .jpeg, .png vagy .webp végződése legyen
+
+Jó példák:
+
+kepek/vasi-autokozmetika.jpg
+kepek/lili-szepsegszalon.png
+kepek/savaria-izek-etterem.jpg
+
+Rossz példák:
+
+kepek/Vasi Autókozmetika.jpg
+kepek/lili szépségszalon.png
+kepek/Savaria-Ízek-Étterem.JPG
+2. Ha van saját kép
+
+Az adott hirdetéskártyában az <article ...> sor alá ezt kell betenni:
+
+<img src="kepek/vallalkozas-neve.jpg" alt="Vállalkozás neve" class="ad-image">
+
+Példa:
+
+<article class="ad-card" data-category="auto" data-search="vasi autókozmetika celldömölk autótisztítás polírozás">
+  <img src="kepek/vasi-autokozmetika.jpg" alt="Vasi Autókozmetika" class="ad-image">
+
+  <div class="ad-top">
+    <div class="ad-icon">🚗</div>
+  </div>
+3. Ha nincs saját kép
+
+Akkor az <article ...> sor alá ezt kell betenni:
+
+<div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+
+Példa:
+
+<article class="ad-card" data-category="szepseg" data-search="lili szépségszalon sárvár fodrászat manikűr">
+  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+
+  <div class="ad-top">
+    <div class="ad-icon">✂️</div>
+  </div>
+4. Fontos szabály
+
+Minden hirdetéskártyában vagy kép legyen, vagy helykitöltő.
+
+Képes hirdetés:
+
+<img src="kepek/vallalkozas-neve.jpg" alt="Vállalkozás neve" class="ad-image">
+
+Kép nélküli hirdetés:
+
+<div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+
+Mindig közvetlenül az <article ...> sor alá kell tenni.
+
+5. Ellenőrzés új ügyfélnél
+
+Új ügyfél felvitele után ellenőrizd:
+
+ Van kép vagy helykitöltő a hirdetéskártyában
+ Ha van kép, a fájl a kepek mappában van
+ A kép fájlneve pontosan egyezik az src="..." részben szereplő névvel
+ Nincs kis- és nagybetű eltérés
+ Nincs ékezet vagy szóköz a képfájl nevében
+ A kép vagy helykitöltő közvetlenül az <article ...> sor alatt van
+
+## 3. Mentés
+
+Alul kattints:
+
+**Változtatások véglegesítése**
+
+Ha ez kész, utána frissítjük az `index.html` fájlban lévő **ÚJ HIRDETÉSKÁRTYA SABLON** részt is, hogy abban is benne legyen a képhely.
