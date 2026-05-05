@@ -161,3 +161,157 @@ https://nemethlajos24-tech.github.io/Vas-megyei-hirdet-sek/vallalkozasok/vallalk
 5. contact-actions részben Adatlap gomb beszúrása
 6. Változtatások véglegesítése
 7. Tesztelés az élő oldalon
+
+
+---
+
+# Új ügyfél felvitele utáni ellenőrzőlista
+
+Ezt minden új vállalkozás felvitele után végig kell ellenőrizni.
+
+## 1. Adatlap ellenőrzése
+
+- [ ] Létrejött az adatlap fájl a `vallalkozasok` mappában
+- [ ] A fájlnév kisbetűs
+- [ ] A fájlnév ékezet nélküli
+- [ ] A fájlnév szóköz helyett kötőjeles
+- [ ] A fájl vége `.html`
+- [ ] Csak egyszer szerepel az útvonalban a `vallalkozasok`
+
+Jó példa:
+
+```text
+vallalkozasok/vasi-autokozmetika.html
+
+2. Adatlap tartalmi ellenőrzése
+ A vállalkozás neve jó
+ A település jó
+ A kategória jó
+ A telefonszám jó
+ Az email cím jó
+ A weboldal / Facebook link jó
+ A bemutatkozó szöveg ki van töltve
+ A főbb szolgáltatások ki vannak töltve
+ A nyitvatartás ki van töltve
+ A szolgáltatási terület ki van töltve
+ Nem maradt benne IDE_ kezdetű sablonszöveg
+
+Keresés ellenőrzéshez az adatlapban:
+
+IDE_
+
+Ha talál ilyet, akkor még maradt benne sablonos rész.
+
+3. Főoldali hirdetéskártya ellenőrzése
+
+Az index.html fájlban az adott vállalkozás kártyájánál ellenőrizni kell:
+
+ Jó a data-category
+ Jó a data-search
+ Jó a település
+ Jó a vállalkozás neve
+ Jó a rövid szolgáltatáscím
+ Jó a rövid bemutatkozás
+ Jó a látható telefonszám
+ Jó a látható email cím
+ Jó a weboldal / Facebook sor
+4. Gombok ellenőrzése
+
+A hirdetéskártyán belül a contact-actions részben legyen:
+
+<div class="contact-actions">
+  <a class="contact-button" href="tel:+36...">Hívás</a>
+  <a class="contact-button secondary" href="mailto:...">Email</a>
+  <a class="contact-button secondary" href="vallalkozasok/valami.html">Adatlap</a>
+</div>
+
+Ellenőrzőlista:
+
+ A Hívás gomb tel: linkje jó
+ A telefonszámban a tel: résznél nincs szóköz
+ Az Email gomb mailto: linkje jó
+ Az Adatlap gomb a jó fájlra mutat
+ Az Adatlap linkben szerepel a vallalkozasok/ mappa
+
+Jó példa:
+
+<a class="contact-button secondary" href="vallalkozasok/vasi-autokozmetika.html">Adatlap</a>
+
+Rossz példa:
+
+<a class="contact-button secondary" href="vasi-autokozmetika.html">Adatlap</a>
+5. Kategória ellenőrzése
+
+A data-category értéke mindig ezek közül legyen:
+
+epitoipar
+vendeglatas
+szepseg
+auto
+otthon
+egeszseg
+oktatas
+bolt
+ingatlan
+rendezveny
+szallas
+allatok
+penzugy
+egyeb
+
+Példák:
+
+data-category="auto"
+data-category="szepseg"
+data-category="vendeglatas"
+6. Élő oldalon tesztelés
+
+Mentés és közzététel után az élő oldalon ellenőrizni kell:
+
+ Megjelent az új hirdetés
+ A Hívás gomb működik
+ Az Email gomb működik
+ Az Adatlap gomb megnyitja az adatlapot
+ A kereső megtalálja a vállalkozást név alapján
+ A kereső megtalálja szolgáltatás alapján
+ A településszűrő megtalálja
+ A kategóriaszűrő alatt jó helyen jelenik meg
+ Telefonon is jól néz ki
+ Számítógépen is jól néz ki
+7. Gyors hibakeresés 404 esetén
+
+Ha az Adatlap gombra kattintva 404 hiba jön:
+
+Ellenőrizd az index.html fájlban az Adatlap linket.
+Ellenőrizd, hogy a fájl tényleg létezik-e a vallalkozasok mappában.
+Ellenőrizd, hogy a fájlnév pontosan ugyanaz-e.
+Ellenőrizd az ékezeteket és kötőjeleket.
+Ellenőrizd, hogy nincs-e dupla vallalkozasok/vallalkozasok.
+
+Jó útvonal:
+
+vallalkozasok/vallalkozas-neve.html
+
+Hibás útvonal:
+
+vallalkozasok/vallalkozasok/vallalkozas-neve.html
+8. Utolsó ellenőrzés mentés előtt
+
+Az index.html fájlban az új kártyánál mindig ellenőrizd:
+
+ <article ...> megvan
+ </article> megvan
+ <div class="contact"> megvan
+ </div> lezárások rendben vannak
+ contact-actions rész megvan
+ Nem maradt benne régi teszt telefonszám
+ Nem maradt benne régi teszt email
+ Nem maradt benne IDE_ sablonszöveg
+
+## 3. Mentés
+
+Alul kattints:
+
+**Változtatások véglegesítése**
+
+Ezzel lesz egy külön ellenőrzőlistád minden új ügyfél felviteléhez. Később, ha azt írod, hogy **„új ügyfelet szeretnék f
