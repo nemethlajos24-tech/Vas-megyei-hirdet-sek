@@ -153,7 +153,7 @@
     }
 
     .step,
-    .ad-card,
+    .listing-card,
     .package,
     .form-box {
       background: white;
@@ -208,17 +208,18 @@
       border-color: #0f172a;
     }
 
-    .ads-grid {
+    .listings-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
+      align-items: start;
     }
 
-    .ad-card {
+    .listing-card {
       transition: 0.2s;
     }
 
-    .ad-image {
+    .listing-image {
   width: 100%;
   height: 160px;
   object-fit: cover;
@@ -228,7 +229,7 @@
   background: #f8fafc;
 }
 
-    .ad-image-placeholder {
+    .listing-image-placeholder {
   width: 100%;
   height: 160px;
   border-radius: 20px;
@@ -245,19 +246,19 @@
   padding: 18px;
 }
 
-    .ad-card:hover {
+    .listing-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
     }
 
-    .ad-top {
+    .listing-top {
       display: flex;
       justify-content: space-between;
       gap: 14px;
       margin-bottom: 16px;
     }
 
-    .ad-icon {
+    .listing-icon {
       width: 48px;
       height: 48px;
       border-radius: 16px;
@@ -287,17 +288,17 @@
       margin-bottom: 6px;
     }
 
-    .ad-card h3 {
+    .listing-card h3 {
       font-size: 21px;
       margin-bottom: 8px;
     }
 
-    .ad-title {
+    .listing-title {
       font-weight: 800;
       margin-bottom: 10px;
     }
 
-    .ad-description {
+    .listing-description {
       color: #475569;
       font-size: 15px;
       margin-bottom: 18px;
@@ -450,14 +451,18 @@
       display: none;
     }
 
-/* Biztonsági javítás: a hirdetéskártyák alapból mindig látszódjanak */
-#adsGrid .ad-card {
+/* Biztonsági javítás: a vállalkozáskártyák alapból mindig látszódjanak */
+#listingsGrid .listing-card,
+#featuredListingsGrid .listing-card {
   display: block;
   visibility: visible;
   opacity: 1;
+  position: relative;
+  height: auto;
 }
 
-#adsGrid .ad-card.hidden {
+#listingsGrid .listing-card.hidden,
+#featuredListingsGrid .listing-card.hidden {
   display: none;
 }
 
@@ -640,7 +645,7 @@ html {
       .hero-grid,
       .submit-grid,
       .steps,
-      .ads-grid,
+      .listings-grid,
       .packages {
         grid-template-columns: 1fr;
       }
@@ -801,7 +806,7 @@ html {
     </p>
   </div>
 
-  <div class="ads-grid" id="featuredAdsGrid"></div>
+  <div class="listings-grid" id="featuredListingsGrid"></div>
 </div>
 
       <div class="filters">
@@ -1059,7 +1064,7 @@ html {
     Próbálj másik keresőszót, települést vagy kategóriát választani.
   </p>
 </div>
-      <div class="ads-grid" id="adsGrid">
+      <div class="listings-grid" id="listingsGrid">
         <!--
 ÚJ HIRDETÉSKÁRTYA SABLON
 
@@ -1087,17 +1092,17 @@ Pénzügy: penzugy
 Egyéb szolgáltatás: egyeb
 -->
 
-<article class="ad-card" data-category="epitoipar" data-search="kőszegi mester kft kőszeg burkolás felújítás kisebb kőműves munkák építőipar helyszíni felmérés">
-  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
-  <div class="ad-top">
-    <div class="ad-icon">🔧</div>
+<article class="listing-card" data-category="epitoipar" data-search="kőszegi mester kft kőszeg burkolás felújítás kisebb kőműves munkák építőipar helyszíni felmérés">
+  <div class="listing-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+  <div class="listing-top">
+    <div class="listing-icon">🔧</div>
     <div class="featured">Kiemelt</div>
   </div>
 
   <div class="city">📍 Kőszeg</div>
   <h3>Kőszegi Mester Kft.</h3>
-  <p class="ad-title">Burkolás, felújítás, kisebb kőműves munkák</p>
-  <p class="ad-description">Megbízható kivitelezés Vas megyében, ingyenes helyszíni felméréssel.</p>
+  <p class="listing-title">Burkolás, felújítás, kisebb kőműves munkák</p>
+  <p class="listing-description">Megbízható kivitelezés Vas megyében, ingyenes helyszíni felméréssel.</p>
 
   <div class="contact">
     <p>☎ +36 30 123 4567</p>
@@ -1112,17 +1117,17 @@ Egyéb szolgáltatás: egyeb
   </div>
 </article>
 
-<article class="ad-card" data-category="vendeglatas" data-search="savaria ízek étterem szombathely napi menü céges ebéd rendezvény házias ételek vendéglátás előrendelés">
-  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
-  <div class="ad-top">
-    <div class="ad-icon">🍽️</div>
+<article class="listing-card" data-category="vendeglatas" data-search="savaria ízek étterem szombathely napi menü céges ebéd rendezvény házias ételek vendéglátás előrendelés">
+  <div class="listing-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+  <div class="listing-top">
+    <div class="listing-icon">🍽️</div>
     <div class="featured">Kiemelt</div>
   </div>
 
   <div class="city">📍 Szombathely</div>
   <h3>Savaria Ízek Étterem</h3>
-  <p class="ad-title">Napi menü, céges ebéd, rendezvények</p>
-  <p class="ad-description">Házias ételek, gyors kiszolgálás, előrendelési lehetőség vállalkozásoknak is.</p>
+  <p class="listing-title">Napi menü, céges ebéd, rendezvények</p>
+  <p class="listing-description">Házias ételek, gyors kiszolgálás, előrendelési lehetőség vállalkozásoknak is.</p>
 
   <div class="contact">
     <p>☎ +36 94 555 010</p>
@@ -1137,16 +1142,16 @@ Egyéb szolgáltatás: egyeb
   </div>
 </article>
 
-<article class="ad-card" data-category="szepseg" data-search="lili szépségszalon sárvár fodrászat manikűr alkalmi smink szépségápolás hajvágás">
-  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
-  <div class="ad-top">
-    <div class="ad-icon">✂️</div>
+<article class="listing-card" data-category="szepseg" data-search="lili szépségszalon sárvár fodrászat manikűr alkalmi smink szépségápolás hajvágás">
+  <div class="listing-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+  <div class="listing-top">
+    <div class="listing-icon">✂️</div>
   </div>
 
   <div class="city">📍 Sárvár</div>
   <h3>Lili Szépségszalon</h3>
-  <p class="ad-title">Fodrászat, manikűr, alkalmi smink</p>
-  <p class="ad-description">Modern szalon Sárváron, időpontfoglalási lehetőséggel.</p>
+  <p class="listing-title">Fodrászat, manikűr, alkalmi smink</p>
+  <p class="listing-description">Modern szalon Sárváron, időpontfoglalási lehetőséggel.</p>
 
   <div class="contact">
     <p>☎ +36 30 757 8253</p>
@@ -1161,16 +1166,16 @@ Egyéb szolgáltatás: egyeb
   </div>
 </article>
 
-<article class="ad-card" data-category="auto" data-search="autoalkatrace szombathely autóalkatrész autóalkatrész kiskereskedelem autósbolt autó alkatrész">
-  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
-  <div class="ad-top">
-    <div class="ad-icon">🚗</div>
+<article class="listing-card" data-category="auto" data-search="autoalkatrace szombathely autóalkatrész autóalkatrész kiskereskedelem autósbolt autó alkatrész">
+  <div class="listing-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+  <div class="listing-top">
+    <div class="listing-icon">🚗</div>
   </div>
 
   <div class="city">📍 Szombathely</div>
   <h3>Autoalkatrace Szombathely</h3>
-  <p class="ad-title">Autóalkatrész kiskereskedelem</p>
-  <p class="ad-description">Gyors megoldás az autó problémáira, autóalkatrészekkel és segítőkész kiszolgálással.</p>
+  <p class="listing-title">Autóalkatrész kiskereskedelem</p>
+  <p class="listing-description">Gyors megoldás az autó problémáira, autóalkatrészekkel és segítőkész kiszolgálással.</p>
 
   <div class="contact">
     <p>☎ +36 30 000 0000</p>
@@ -1185,17 +1190,17 @@ Egyéb szolgáltatás: egyeb
   </div>
 </article>
 
-<article class="ad-card" data-category="auto" data-search="vasi autókozmetika celldömölk külső belső autótisztítás polírozás kárpittisztítás céges flotta autóápolás">
-  <img src="kepek/vasi-autokozmetika.jpg" alt="Vasi Autókozmetika" class="ad-image">
+<article class="listing-card" data-category="auto" data-search="vasi autókozmetika celldömölk külső belső autótisztítás polírozás kárpittisztítás céges flotta autóápolás">
+  <img src="kepek/vasi-autokozmetika.jpg" alt="Vasi Autókozmetika" class="listing-image">
   
-  <div class="ad-top">
-    <div class="ad-icon">🚗</div>
+  <div class="listing-top">
+    <div class="listing-icon">🚗</div>
   </div>
 
   <div class="city">📍 Celldömölk</div>
   <h3>Vasi Autókozmetika</h3>
-  <p class="ad-title">Külső-belső autótisztítás, polírozás</p>
-  <p class="ad-description">Időpontfoglalás rugalmasan, céges flották tisztítása kedvezménnyel.</p>
+  <p class="listing-title">Külső-belső autótisztítás, polírozás</p>
+  <p class="listing-description">Időpontfoglalás rugalmasan, céges flották tisztítása kedvezménnyel.</p>
 
   <div class="contact">
     <p>☎ +36 30 444 7788</p>
@@ -1210,16 +1215,16 @@ Egyéb szolgáltatás: egyeb
   </div>
 </article>
 
-<article class="ad-card" data-category="otthon" data-search="őrségi otthon szerviz körmend háztartási javítások karbantartás csőtörés villanyszerelés otthoni javítások">
-  <div class="ad-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
-  <div class="ad-top">
-    <div class="ad-icon">🏠</div>
+<article class="listing-card" data-category="otthon" data-search="őrségi otthon szerviz körmend háztartási javítások karbantartás csőtörés villanyszerelés otthoni javítások">
+  <div class="listing-image-placeholder">Vasi Hirdető<br>Kép hamarosan</div>
+  <div class="listing-top">
+    <div class="listing-icon">🏠</div>
   </div>
 
   <div class="city">📍 Körmend</div>
   <h3>Őrségi Otthon Szerviz</h3>
-  <p class="ad-title">Háztartási javítások és karbantartás</p>
-  <p class="ad-description">Gyors segítség csőtörés, kisebb villanyszerelés és otthoni javítások esetén.</p>
+  <p class="listing-title">Háztartási javítások és karbantartás</p>
+  <p class="listing-description">Gyors segítség csőtörés, kisebb villanyszerelés és otthoni javítások esetén.</p>
 
   <div class="contact">
     <p>☎ +36 70 111 2222</p>
@@ -1919,28 +1924,28 @@ Egyéb szolgáltatás: egyeb
     const searchInput = document.getElementById("searchInput");
     const citySelect = document.getElementById("citySelect");
     const buttons = document.querySelectorAll(".category-button");
-    const cards = document.querySelectorAll("#adsGrid .ad-card");
-const featuredGrid = document.getElementById("featuredAdsGrid");
+    const cards = document.querySelectorAll("#listingsGrid .listing-card");
+const featuredGrid = document.getElementById("featuredListingsGrid");
     const resultsCount = document.getElementById("resultsCount");
 const noResultsMessage = document.getElementById("noResultsMessage");
 const clearFilters = document.getElementById("clearFilters");
     let selectedCategory = "all";
 
-    function renderFeaturedAds() {
+    function renderFeaturedListings() {
   if (!featuredGrid) return;
 
-  const featuredCards = Array.from(cards).filter((card) =>
+  const featuredListings = Array.from(cards).filter((card) =>
     card.querySelector(".featured")
   );
 
   featuredGrid.innerHTML = "";
 
-  if (featuredCards.length === 0) {
+  if (featuredListings.length === 0) {
     document.getElementById("kiemeltHirdetesek").style.display = "none";
     return;
   }
 
-  featuredCards.forEach((card) => {
+  featuredListings.forEach((card) => {
     const clone = card.cloneNode(true);
     featuredGrid.appendChild(clone);
   });
@@ -2007,7 +2012,7 @@ clearFilters.addEventListener("click", () => {
   filterCards();
 });
 
-renderFeaturedAds();
+renderFeaturedListings();
     filterCards();
   </script>
   <a href="#" class="back-to-top" aria-label="Vissza az oldal tetejére">↑</a>
