@@ -92,3 +92,42 @@ Jelenlegi stabil állapot neve
 Képes kártyák + template javítva, oldal működik
 Következő fejlesztések csak ezután
 
+---
+
+## Új stabil állapot
+
+## Dátum
+
+2026. május 12.
+
+## Frissített működő állapot
+
+Az oldal jelenlegi állapotában működik:
+
+- saját domain: https://vasihirdetesek.hu
+- HTTPS kényszerítése bekapcsolva
+- GitHub Pages domainbeállítás rendben
+- Rackhost DNS rekordok beállítva
+- Google Űrlap link frissítve
+- hirdetésfeladó űrlap működik
+- beküldés utáni visszaigazoló üzenet működik
+- Vasi Hirdető név Vasi Hirdetések névre frissítve
+- régi GitHub Pages link cserélve az új domainre
+- hirdetésfeladás résznél emailes kérdésdoboz működik
+- Email írása gomb működik
+- mobilos nézet első körben javítva
+- hirdetéslista, kereső és szűrők működnek
+- adatlapok működnek
+
+## Jelenlegi fontos linkek
+
+```text
+Weboldal:
+https://vasihirdetesek.hu
+
+Google Űrlap:
+https://forms.gle/6R44Wh8RiqHY5VNy5
+
+Kapcsolati email:
+vasmegyeihirdetesek@gmail.com
+
