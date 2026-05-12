@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gampel Domonkos - Dom’s Kárpit Clean | Vasi Hirdetések</title>
+  <meta name="description" content="Dom’s Kárpit Clean - professzionális háznál végzett kárpittisztítás Szombathelyen és környékén. Kanapék, szőnyegek, matracok és autókárpitok tisztítása." />
+
+  <style>
+    :root {
+      --dark: #0f172a;
+      --text: #10201b;
+      --muted: #64748b;
+      --green: #34d399;
+      --green-dark: #007f5f;
+      --light: #f4f8f6;
+      --border: #d8e2ec;
+      --card: #ffffff;
+      --gold-bg: #fff3cd;
+      --gold-border: #facc15;
+      --gold-text: #92400e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .back-link {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 22px 70px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: stretch;
+      margin-bottom: 34px;
+    }
+
+    .hero-card,
+    .contact-card,
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .badge.featured {
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-text);
+    }
+
+    .badge.city {
+      background: #eafaf3;
+      color: var(--green-dark);
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.06;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: #334155;
+      max-width: 760px;
+    }
+
+    .image-box {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 330px;
+      background: linear-gradient(135deg, #ffffff, #ecfdf5);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      min-height: 250px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #64748b;
+      font-size: 24px;
+      font-weight: 800;
+      background: rgba(255,255,255,0.65);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .content-card {
+      padding: 32px;
+      margin-bottom: 26px;
+    }
+
+    .content-card h2 {
+      font-size: 30px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .content-card p {
+      color: #334155;
+      font-size: 17px;
+      margin-bottom: 14px;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      list-style: none;
+      margin-top: 18px;
+    }
+
+    .service-list li {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .contact-card {
+      padding: 28px;
+      position: sticky;
+      top: 92px;
+    }
+
+    .contact-card h2 {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .contact-item {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 14px 0;
+      color: #334155;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: block;
+      text-align: center;
+      padding: 15px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      border: 1px solid transparent;
+    }
+
+    .button.primary {
+      background: var(--dark);
+      color: #ffffff;
+    }
+
+    .button.secondary {
+      background: #ecfdf5;
+      color: var(--green-dark);
+      border-color: #a7f3d0;
+    }
+
+    .note-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 18px;
+      color: #475569;
+    }
+
+    .footer {
+      text-align: center;
+      color: #64748b;
+      padding: 34px 20px;
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        position: static;
+      }
+
+      .service-list {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-card,
+      .content-card,
+      .contact-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../index.html">Vasi Hirdetések</a>
+      <a class="back-link" href="../index.html#hirdetesek">← Vissza a hirdetésekhez</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge-row">
+          <span class="badge featured">Kiemelt hirdetés</span>
+          <span class="badge city">📍 Szombathely</span>
+          <span class="badge city">Egyéb szolgáltatás</span>
+        </div>
+
+        <h1>Gampel Domonkos</h1>
+        <div class="subtitle">Dom’s Kárpit Clean</div>
+
+        <p class="lead">
+          Professzionális háznál végzett kárpittisztítás Szombathelyen és környékén,
+          főként kanapék, ülőgarnitúrák, szőnyegek, matracok és autókárpitok mélytisztítására.
+        </p>
+      </div>
+
+      <div class="hero-card image-box">
+        <div class="image-placeholder">
+          Vasi Hirdetések<br />
+          Kép hamarosan
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div>
+        <article class="content-card">
+          <h2>Bemutatkozás</h2>
+          <p>
+            A Dom’s Kárpit Clean professzionális kárpittisztítással foglalkozik
+            Szombathelyen és környékén, elsősorban háznál végzett szolgáltatással.
+          </p>
+          <p>
+            Fő profilunk a kanapék, ülőgarnitúrák, szőnyegek és autókárpitok
+            mélytisztítása modern gépekkel és hatékony tisztítószerekkel.
+          </p>
+          <p>
+            Célunk, hogy ügyfeleink otthonában kényelmesen, gyorsan és megbízhatóan
+            varázsoljuk újra tisztává és frissé a kárpitokat.
+          </p>
+          <p>
+            Szolgáltatásunk ideális családoknak, kisgyermekes háztartásoknak,
+            kisállat-tulajdonosoknak, vagy bárkinek, aki szeretné higiénikusabbá
+            és esztétikusabbá tenni otthonát.
+          </p>
+          <p>
+            Munkánk során kiemelten figyelünk az alaposságra, a részletekre és
+            az ügyfelek elégedettségére.
+          </p>
+        </article>
+
+        <article class="content-card">
+          <h2>Fő szolgáltatások</h2>
+          <ul class="service-list">
+            <li>Kárpittisztítás</li>
+            <li>Kanapé tisztítás</li>
+            <li>Ülőgarnitúra tisztítás</li>
+            <li>Szőnyegtisztítás</li>
+            <li>Autókárpit tisztítás</li>
+            <li>Matrac tisztítás</li>
+            <li>Folteltávolítás</li>
+            <li>Szagtalanítás</li>
+            <li>Háznál végzett tisztítás</li>
+          </ul>
+        </article>
+
+        <article class="content-card">
+          <h2>Miért válaszd?</h2>
+          <p>
+            Rugalmas időpontok, precíz munkavégzés és kedvező árak.
+          </p>
+
+          <div class="note-box">
+            <strong>Szolgáltatási terület:</strong><br />
+            Szombathely és környéke
+          </div>
+
+          <div class="note-box">
+            <strong>Keresési kulcsszavak:</strong><br />
+            kárpittisztítás, kanapétisztítás, tisztaság, szőnyegtisztítás,
+            autókárpit tisztítás, matrac tisztítás, Szombathely
+          </div>
+        </article>
+      </div>
+
+      <aside class="contact-card">
+        <h2>Kapcsolat</h2>
+
+        <div class="contact-item">
+          <strong>Telefon</strong>
+          <a href="tel:+36307430084">+36 30 743 0084</a>
+        </div>
+
+        <div class="contact-item">
+          <strong>Email</strong>
+          <a href="mailto:gampel.domonkos2000@gmail.com">gampel.domonkos2000@gmail.com</a>
+        </div>
+
+        <div class="contact-item">
+          <strong>Facebook</strong>
+          <a href="https://www.facebook.com/share/1DrtKjmicd/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+            Facebook oldal megnyitása
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <strong>Nyitvatartás</strong>
+          Hétfő–Szombat: 15:00–20:00
+        </div>
+
+        <div class="actions">
+          <a class="button primary" href="tel:+36307430084">Hívás</a>
+          <a class="button secondary" href="mailto:gampel.domonkos2000@gmail.com">Email írása</a>
+          <a class="button secondary" href="https://www.facebook.com/share/1DrtKjmicd/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook oldal</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2026 Vasi Hirdetések. Minden jog fenntartva.
+  </footer>
+</body>
+</html>
