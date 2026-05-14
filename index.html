@@ -208,15 +208,18 @@
       border-color: #0f172a;
     }
 
-    .listings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      align-items: start;
-    }
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
 
     .listing-card {
       transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
 .listing-image {
@@ -313,17 +316,19 @@
       margin-bottom: 10px;
     }
 
-    .listing-description {
-      color: #475569;
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
+ .listing-description {
+  color: #475569;
+  font-size: 15px;
+  margin-bottom: 18px;
+  min-height: 78px;
+}
 
-    .contact {
+.contact {
   border-top: 1px solid #e2e8f0;
   padding-top: 16px;
   color: #475569;
   font-size: 14px;
+  margin-top: auto;
 }
 
 .contact-actions {
