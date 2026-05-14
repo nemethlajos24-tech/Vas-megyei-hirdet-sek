@@ -131,3 +131,58 @@ https://forms.gle/6R44Wh8RiqHY5VNy5
 Kapcsolati email:
 vasmegyeihirdetesek@gmail.com
 
+---
+
+## Stabil állapot - sablonrendszer bevezetve
+
+## Dátum
+
+2026. május 14.
+
+## Frissített működési rendszer
+
+A Vasi Hirdetések oldalon bevezetésre került a szétbontott ügyfélkezelési és sablonrendszer.
+
+## Új mappák
+
+- `sablonok/`
+- `ugyfelek/`
+
+## Új sablonfájlok
+
+- `sablonok/kartya-sablon.html`
+- `sablonok/adatlap-sablon.html`
+- `sablonok/uj-ugyfel-ellenorzolista.md`
+- `sablonok/HASZNALATI-SZABALYOK.md`
+
+## Ügyfél-munkalap rendszer
+
+Minden új vállalkozáshoz külön munkalap készül az `ugyfelek/` mappában.
+
+Első rögzített ügyfél-munkalap:
+
+- `ugyfelek/gampel-domonkos.md`
+
+## Működési szabály
+
+Innentől minden új vállalkozás feltöltése egységes folyamat szerint történik:
+
+1. ügyfél munkalap létrehozása
+2. kép feltöltése
+3. főoldali kártya létrehozása sablonból
+4. adatlap létrehozása sablonból
+5. linkek és mobilnézet ellenőrzése
+6. ügyfélnyilvántartás frissítése
+7. ügyfél visszaigazolása
+
+## Fontos döntés
+
+A vállalkozói adatlapoknál a Kőszegi Mester Kft. adatlapja a mérvadó sablon.
+
+Nem készül minden ügyfélhez külön dizájn, csak a sablonban szereplő adatok, szövegek, képek és linkek cserélődnek.
+
+## Stabil állapot neve
+
+```text
+Sablonrendszer és ügyfél-munkalap rendszer bevezetve
+
